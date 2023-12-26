@@ -1,0 +1,14 @@
+.box {
+    height: 3vw;
+    width: 100vw;
+    position: fixed;
+  }
+  
+  .box .rectangle {
+    background-color: #2d0052;
+    height: 2vw;
+    text-align: center;
+    padding-top: 1.2%;
+    font-size: 2vh;
+    color: whitesmoke;
+  }
