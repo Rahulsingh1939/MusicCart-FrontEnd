@@ -1,7 +1,7 @@
 .box {
     height: 3vw;
     width: 100vw;
-    position: fixed;
+    position: relative;
   }
   
   .box .rectangle {
