@@ -1,7 +1,9 @@
 import React from "react";
 import HomeCSS from "./Home.module.css";
-
+import { useAuth } from "../../context/api";
 const Home = () => {
+  
+  const [auth,setAuth] = useAuth();
   return (
     <div className={HomeCSS.element}>
       <div className={HomeCSS.div}>
@@ -73,6 +75,10 @@ const Home = () => {
         <div className={HomeCSS["overlap-9"]}>
           <img className={HomeCSS["image-2"]} alt="Image" src="https://c.animaapp.com/aUDSW2NR/img/image-13@2x.png" />
         </div>
+
+        
+    <pre>{JSON.stringify(auth,null,4)}</pre>
+
         <div className={HomeCSS["group-2"]}>
           <div className={HomeCSS["text-wrapper-14"]}>boAt Rockerz 551ANC</div>
           <div className={HomeCSS["text-wrapper-15"]}>Price - ₹ 3,000</div>

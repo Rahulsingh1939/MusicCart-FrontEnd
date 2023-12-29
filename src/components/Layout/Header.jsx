@@ -1,8 +1,20 @@
 import React from 'react'
 import styled from "styled-components";
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/api';
+import toast from 'react-hot-toast';
 
 const Header = () => {
+  const [auth,setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user:null,
+      token:""
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logged Out Successfully");
+  }
   return (
     <div>
       <Container>
@@ -19,11 +31,17 @@ const Header = () => {
         <Line />
         <Button>Shop Now</Button>
       </Promotion>
+      {
+        !auth.user ? (
+          <Auth>
+            <Button><a href='/signin'>Login</a></Button>
+            <Line />
+            <Button><a href='/register'>Signup</a></Button>
+          </Auth>) : (
       <Auth>
-        <Button><a href='/signin'>Login</a></Button>
-        <Line />
-        <Button><a href='/register'>Signup</a></Button>
-      </Auth>
+        <Button><a onClick={handleLogout} href='/signin'>Logout</a></Button>
+      </Auth>)
+      }
     </Container>
     </div>
   )

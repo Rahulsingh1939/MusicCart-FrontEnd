@@ -4,12 +4,14 @@ import Footer from "../../components/Layout/Footer";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../context/api";
 
 const Register = (props) => {
   //Login States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [auth,setAuth] = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +19,12 @@ const Register = (props) => {
       const res = await axios.post(`/api/v1/auth/login`, { email, password });
       if (res.data.success) {
         toast.success(res.data.message);
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        });
+        localStorage.setItem('auth', JSON.stringify(res.data));
         navigate("/");
       } else {
         toast.error(res.data.message);
