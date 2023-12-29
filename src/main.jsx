@@ -40,11 +40,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     {/* <App /> */}
     <AuthProvider >
     <RouterProvider router={router} />
     <Toaster />
     </AuthProvider>
-  </React.StrictMode>,
+  </>,
 )
