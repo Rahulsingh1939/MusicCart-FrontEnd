@@ -12,17 +12,36 @@ import ProductItem from "../../components/ProductCard/Card";
 const Home = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  const getAllProducts = async () => {
-    try {
-      const { data } = await axios.get(`/api/v1/product/all-products`);
-      setProducts(data.products);
-      console.log(data.products);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-   getAllProducts()
+    //get all cat
+    const getAllCategory = async () => {
+      try {
+        const { data } = await axios.get("/api/v1/category/get-category");
+        if (data?.success) {
+          setCategories(data?.category);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    useEffect(() => {
+      getAllCategory();
+    }, []);
+    
+  useEffect(()=> {
+    const getAllProducts = async () => {
+      try {
+        const { data } = await axios.get(`/api/v1/product/all-products`);
+        setProducts(data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllProducts();
+    //eslint-disable-next-line
+  },[]);
   return (
     <>
       <StyledComponent />
@@ -31,8 +50,8 @@ const Home = () => {
       <ProductDetails />
       <GridContainer>
         {products?.map((p)=> (
-          <GridItem >
-            <ProductItem key={p._id}  name={p.name} price={p.price} description={p.description}/>
+          <GridItem key={p._id}>
+            <ProductItem name={p.name} price={p.price} description={p.description}/>
           </GridItem>
         ))}
       </GridContainer>

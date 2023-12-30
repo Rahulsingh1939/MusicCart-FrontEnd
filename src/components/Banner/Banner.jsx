@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/api";
 
 const StyledComponent = (props) => {
+  const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
   return (
     <Container>
@@ -14,13 +16,13 @@ const StyledComponent = (props) => {
         <Title>MusiCart</Title>
         <Subtitle>Home</Subtitle>
       </Header>
-      <Cart type="button" onClick={()=> navigate('/cart')}>
+        {(auth.user) && <Cart type="button" onClick={()=> navigate('/cart')}>
         <CartImage
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/5bd8993dc9523f98840a8d36624f7a4a6aba09735b3370e7c7716542814ed02e?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
         />
         <CartText>View Cart</CartText>
-      </Cart>
+      </Cart>}
     </Container>
   );
 };

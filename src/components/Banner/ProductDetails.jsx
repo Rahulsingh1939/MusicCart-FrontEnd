@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Dropdown from "./Dropdown";
 
 function ProductDetails(props) {
+  const options = ['Option 1', 'Option 2', 'Option 3'];
   return (
     <>
     <Wrapper>
@@ -14,32 +16,16 @@ function ProductDetails(props) {
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/8cb255ad535b0e12aee5b0b0e9d9695f7b4d506d595e9884fbb5abb4faf6e78b?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
       />
       <Attribute>
-        <Label>Headphone type</Label>
-        <Icon
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/b83855cf41f5fb05ee5bf02397180ca226e09278222588e1a09e927b9d668116?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
+        <Dropdown options={options} label='Headphone Type'/>
       </Attribute>
       <Attribute>
-        <Label>Company</Label>
-        <Icon
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a840494c71ac8dff21bcc3d09eb800317956b8e0cfc6948ffc583de95fdeeecc?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
+      <Dropdown options={options} label='Company'/>
       </Attribute>
       <Attribute>
-        <Label>Colour</Label>
-        <Icon
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/174094dc8d7ec37ee3eb953a413b174f0cd029534a38bc54316106219ae0b5d5?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
+      <Dropdown options={options} label='Color'/>
       </Attribute>
       <Attribute>
-        <Label>Price</Label>
-        <Icon
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/174094dc8d7ec37ee3eb953a413b174f0cd029534a38bc54316106219ae0b5d5?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
+      <Dropdown options={options} label='Price'/>
       </Attribute>
       <Container>
       <SortBy>Sort by: Featured</SortBy>
@@ -85,10 +71,12 @@ const Attribute = styled.div`
   border-radius: 34.145px;
   background-color: #d9d9d9;
   align-self: start;
-  display: flex;
+  min-width:5vw;
+
+  position: relative;
+  display: inline-block;
   margin-top: 6px;
-  gap: 6px;
-  padding: 15px 28px;
+  padding: 10px 34px;
 
   @media (max-width: 991px) {
     padding: 0 20px;
