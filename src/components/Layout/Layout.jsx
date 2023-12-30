@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 const Layout = ({ children,title,description,keyword,author }) => {
   return (
-    <div>
+    <div className="layout">
       <Helmet>
         <meta charSet="utf-8" />
         <meta name="description" content={description} />
