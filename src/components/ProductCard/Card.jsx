@@ -17,10 +17,12 @@ function ProductItem({ name, price, description, imgUrl }) {
           loading="lazy"
           srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/2ab4c29ae43131d16ecd73341be9a1af0454b43e8080ece6f6e5ada30bac1ad4?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
         />
-        {auth.user && <StyledImg
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/d499dad26aa42de99e77541483faeedbbdc31358dd7032bacf84aba3b52e6a97?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />}
+        {auth.user && (
+          <StyledImg
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d499dad26aa42de99e77541483faeedbbdc31358dd7032bacf84aba3b52e6a97?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
+          />
+        )}
       </ImageWrapper>
       <ContentWrapper>
         <ProductName>{name}</ProductName>

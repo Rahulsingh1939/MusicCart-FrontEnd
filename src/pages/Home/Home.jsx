@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -14,23 +14,23 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-    //get all cat
-    const getAllCategory = async () => {
-      try {
-        const { data } = await axios.get("/api/v1/category/get-category");
-        if (data?.success) {
-          setCategories(data?.category);
-        }
-      } catch (error) {
-        console.log(error);
+  //get all cat
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/category/get-category");
+      if (data?.success) {
+        setCategories(data?.category);
       }
-    };
-  
-    useEffect(() => {
-      getAllCategory();
-    }, []);
-    
-  useEffect(()=> {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
+  useEffect(() => {
     const getAllProducts = async () => {
       try {
         const { data } = await axios.get(`/api/v1/product/all-products`);
@@ -41,7 +41,7 @@ const Home = () => {
     };
     getAllProducts();
     //eslint-disable-next-line
-  },[]);
+  }, []);
   return (
     <>
       <StyledComponent />
@@ -49,9 +49,13 @@ const Home = () => {
       <SearchComponent />
       <ProductDetails />
       <GridContainer>
-        {products?.map((p)=> (
+        {products?.map((p) => (
           <GridItem key={p._id}>
-            <ProductItem name={p.name} price={p.price} description={p.description}/>
+            <ProductItem
+              name={p.name}
+              price={p.price}
+              description={p.description}
+            />
           </GridItem>
         ))}
       </GridContainer>

@@ -1,12 +1,11 @@
 // Dropdown.js
 
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const DropdownButton = styled.button`
   font-size: 16px;
-  min-width:100%;
+  min-width: 100%;
   border: none;
   cursor: pointer;
   background-color: #d9d9d9;
@@ -53,9 +52,9 @@ const Icon = styled.img`
   margin-top: 8px;
   max-width: 100%;
 `;
-const Dropdown = ({ options,label }) => {
+const Dropdown = ({ options, label }) => {
   const [isopen, setIsOpen] = useState(false);
-  const [choice,setChoice] = useState("");
+  const [choice, setChoice] = useState("");
 
   const toggleDropdown = () => {
     setIsOpen(!isopen);
@@ -69,12 +68,14 @@ const Dropdown = ({ options,label }) => {
 
   return (
     <>
-      <DropdownButton onClick={toggleDropdown}><Label>{label}</Label>
+      <DropdownButton onClick={toggleDropdown}>
+        <Label>{label}</Label>
         <Icon
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/b83855cf41f5fb05ee5bf02397180ca226e09278222588e1a09e927b9d668116?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        /></DropdownButton>
-      <DropdownContent  style={{ display: isopen ? 'block' : 'none' }}>
+        />
+      </DropdownButton>
+      <DropdownContent style={{ display: isopen ? "block" : "none" }}>
         {options.map((item, index) => (
           <DropdownItem key={index} onClick={() => handleItemClick(item)}>
             {item}

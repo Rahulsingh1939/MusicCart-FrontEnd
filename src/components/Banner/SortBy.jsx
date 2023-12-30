@@ -7,7 +7,7 @@ const DropdownButton = styled.button`
   font-size: 16px;
   border: none;
   cursor: pointer;
-  background-color:white;
+  background-color: white;
 `;
 
 const DropdownContent = styled.div`
@@ -51,7 +51,7 @@ const Icon = styled.img`
 `;
 const SortBy = ({ options, label }) => {
   const [isopen, setIsOpen] = useState(false);
-  const [choice,setChoice] = useState("");
+  const [choice, setChoice] = useState("");
 
   const toggleDropdown = () => {
     setIsOpen(!isopen);
@@ -66,7 +66,9 @@ const SortBy = ({ options, label }) => {
   return (
     <>
       <DropdownButton onClick={toggleDropdown}>
-        <Label>{label} : {choice}</Label>
+        <Label>
+          {label} : {choice}
+        </Label>
         <Icon
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/b83855cf41f5fb05ee5bf02397180ca226e09278222588e1a09e927b9d668116?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
