@@ -1,115 +1,93 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/api";
 
-const StyledComponent = (props) => {
-  const [auth, setAuth] = useAuth();
+function DiscountBanner(props) {
     const navigate = useNavigate();
   return (
     <Container>
-      <Header>
-        <Logo
-          loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
-        <Title>MusiCart</Title>
-        <Subtitle>Home</Subtitle>
-      </Header>
-        {(auth.user) && <Cart type="button" onClick={()=> navigate('/cart')}>
-        <CartImage
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5bd8993dc9523f98840a8d36624f7a4a6aba09735b3370e7c7716542814ed02e?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
-        <CartText>View Cart</CartText>
-      </Cart>}
+      <Content>
+        <Title>Grab up to 50% off on <br /> selected headphones</Title>
+        <Button type="button" onClick={()=> navigate('/')}>Buy Now</Button>
+      </Content>
+      <Image loading="lazy" srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/e2c9723fe1a3d3c3670c4cbb5510608231a54955e3e83533189f45fa8742e992?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"/>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
+  border-radius: 29px;
+  background: linear-gradient(90deg, #7286b4 0%, #e794ce 100%);
+  align-self: center;
   display: flex;
+  margin: auto;
+  width: 82vw;
+  height:35vh;
+  max-width: 100%;
   justify-content: space-between;
-  padding: 0 7vw;
-  margin: 5vh;
-
+  
   @media (max-width: 991px) {
-    max-width: 100%;
     flex-wrap: wrap;
-    margin: 40px 10px 0 0;
+    padding: 20px;
+    margin-top: 40px;
   }
 `;
 
-const Header = styled.div`
+const Content = styled.div`
+  z-index: 1;
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-`;
-
-const Logo = styled.img`
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  width: 63px;
-  overflow: hidden;
-  max-width: 100%;
-  cursor: pointer;
+  flex-direction: column;
+  
+  margin: 1.5vw 3vw;
+  
+  @media (max-width: 991px) {
+    max-width: 100%;
+  }
 `;
 
 const Title = styled.div`
   color: #2e0052;
-  margin: auto 0;
-  font: 600 44px Roboto, sans-serif;
-`;
-
-const Subtitle = styled.div`
-  color: #000;
-  align-self: center;
-  white-space: nowrap;
-  margin: auto 2vw;
-  font: 600 28px Roboto, sans-serif;
-  cursor: pointer;
-
+  font: 500 7vh Roboto, sans-serif;
+  
   @media (max-width: 991px) {
-    white-space: initial;
+    max-width: 100%;
+    font-size: 40px;
   }
 `;
 
-const Cart = styled.div`
-  border-radius: 47px;
-  background-color: #1d7000;
-  align-self: start;
-  display: flex;
-  margin-top: 11px;
-  gap: 6px;
+const Button = styled.div`
+  color: #fff;
+  white-space: nowrap;
+  border-radius: 30px;
+  background-color: #2e0052;
+  margin: 24px;
+  width: 10vw;
+  max-width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 19px 60px;
   cursor: pointer;
-  padding: 13px 32px;
+  font: 400 27px Roboto, sans-serif;
+  
   @media (max-width: 991px) {
+    white-space: initial;
     padding: 0 20px;
   }
 `;
 
-const CartImage = styled.img`
-  aspect-ratio: 0.96;
+const Image = styled.img`
+  aspect-ratio: 1.45;
   object-fit: contain;
   object-position: center;
-  width: 26px;
-  fill: #fff;
+  width: 35%;
   overflow: hidden;
-  max-width: 100%;
-`;
-
-const CartText = styled.div`
-  color: #fff;
-  align-self: center;
-  flex-grow: 1;
-  white-space: nowrap;
-  margin: auto 0;
-  font: 400 22px Roboto, sans-serif;
-
+  align-self: end;
+  z-index: 1;
+  
   @media (max-width: 991px) {
-    white-space: initial;
+    max-width: 100%;
   }
 `;
 
-export default StyledComponent;
+export default DiscountBanner;

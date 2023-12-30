@@ -3,8 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 
 import { useAuth } from "../../context/api";
-import StyledComponent from "../../components/Banner/Banner";
-import DiscountBanner from "../../components/Banner/Banner2";
+import StyledComponent from "../../components/Banner/Head";
+import DiscountBanner from "../../components/Banner/Banner";
 import SearchComponent from "../../components/Banner/Search";
 import ProductDetails from "../../components/Banner/ProductDetails";
 import ProductItem from "../../components/ProductCard/Card";
