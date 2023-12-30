@@ -52,7 +52,7 @@ const Icon = styled.img`
   margin-top: 8px;
   max-width: 100%;
 `;
-const Dropdown = ({ options, label }) => {
+const Dropdown = ({ options, label,onChange }) => {
   const [isopen, setIsOpen] = useState(false);
   const [choice, setChoice] = useState("");
 
@@ -61,8 +61,7 @@ const Dropdown = ({ options, label }) => {
   };
 
   const handleItemClick = (item) => {
-    setChoice(item);
-    console.log(`Selected: ${item}`);
+    onChange(item);
     setIsOpen(false);
   };
 

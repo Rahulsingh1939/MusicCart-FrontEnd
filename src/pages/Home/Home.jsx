@@ -13,21 +13,19 @@ const Home = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
-    
-  //get all cat
-  const getAllCategory = async () => {
-    try {
-      const { data } = await axios.get("/api/v1/category/get-category");
-      if (data?.success) {
-        setCategories(data?.category);
-        console.log(categories)
+    //get all cat
+    const getAllCategory = async () => {
+      try {
+        const { data } = await axios.get("/api/v1/category/get-category");
+        if (data?.success) {
+          setCategories(data?.category);
+          console.log(categories);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
 
     getAllCategory();
     //eslint-disable-next-line
