@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Dropdown from "./Dropdown";
 import SortBy from "./SortBy";
 
-function ProductDetails(props) {
+function ProductDetails() {
   const options = ["Option 1", "Option 2", "Option 3"];
   return (
     <>
