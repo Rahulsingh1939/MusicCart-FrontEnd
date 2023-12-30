@@ -55,12 +55,14 @@ const Icon = styled.img`
 `;
 const Dropdown = ({ options,label }) => {
   const [isopen, setIsOpen] = useState(false);
+  const [choice,setChoice] = useState("");
 
   const toggleDropdown = () => {
     setIsOpen(!isopen);
   };
 
   const handleItemClick = (item) => {
+    setChoice(item);
     console.log(`Selected: ${item}`);
     setIsOpen(false);
   };
