@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Dropdown from "./Dropdown";
+import SortBy from "./SortBy";
 
 function ProductDetails(props) {
   const options = ['Option 1', 'Option 2', 'Option 3'];
@@ -28,11 +29,7 @@ function ProductDetails(props) {
       <Dropdown options={options} label='Price'/>
       </Attribute>
       <Container>
-      <SortBy>Sort by: Featured</SortBy>
-      <LazyImage
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/383823a5e7bc0492d7fa328d4915f608eba2f4a3caa70f602fb47c89557f1d4a?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-      />
+      <SortBy options={options} label='Sort By'/>
     </Container>
     </Wrapper>
 
@@ -83,28 +80,6 @@ const Attribute = styled.div`
   }
 `;
 
-const Label = styled.div`
-  color: #000;
-  flex-grow: 1;
-  white-space: nowrap;
-  font: 500 23px Roboto, sans-serif;
-
-  @media (max-width: 991px) {
-    white-space: initial;
-  }
-`;
-
-const Icon = styled.img`
-  aspect-ratio: 1.6;
-  object-fit: contain;
-  object-position: center;
-  width: 16px;
-  fill: #000;
-  overflow: hidden;
-  align-self: start;
-  margin-top: 8px;
-  max-width: 100%;
-`;
 const Container = styled.div`
 border-radius: 30.731px;
 border: 3px solid #e1e1e1;
@@ -119,29 +94,5 @@ padding: 15px 49px;
 padding: 0 20px;
 }
 `;
-
-const SortBy = styled.div`
-color: #000;
-flex-grow: 1;
-white-space: nowrap;
-font: 400 22px Roboto, sans-serif;
-
-@media (max-width: 991px) {
-white-space: initial;
-}
-`;
-
-const LazyImage = styled.img`
-aspect-ratio: 1.6;
-object-fit: contain;
-object-position: center;
-width: 16px;
-fill: #000;
-overflow: hidden;
-align-self: start;
-margin-top: 7px;
-max-width: 100%;
-`;
-
 
 export default ProductDetails;
