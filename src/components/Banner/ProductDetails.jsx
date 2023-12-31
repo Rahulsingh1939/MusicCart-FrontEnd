@@ -1,53 +1,4 @@
-import React, { useState,useEffect } from "react";
 import styled from "styled-components";
-import Dropdown from "./Dropdown";
-import SortBy from "./SortBy";
-
-function ProductDetails() {
-  const options = ["Option 1", "Option 2", "Option 3"];
-  const brands=["BOAT","JBL","NOISE"]
-  const [category,setCategory]= useState("");
-  const [brand,setBrand]= useState("");
-  const [color,setColor]= useState("");
-  const [price,setPrice]= useState("");
-
-  useEffect(()=>{
-console.log('brand:',brand)
-  },[brand])
-
-  useEffect(()=>{
-    console.log(' Value Changed')
-      },[brand,color,price])
-  return (
-    <>
-      <Wrapper>
-        <Image
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/04c7ce2067c365edeb77e66c5ad5e80eb421186d9df2ef44f46466e88c67f18e?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
-        <Image
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/8cb255ad535b0e12aee5b0b0e9d9695f7b4d506d595e9884fbb5abb4faf6e78b?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
-        <Attribute>
-          <Dropdown options={options} onChange={setCategory} label="Headphone Type" />
-        </Attribute>
-        <Attribute>
-          <Dropdown options={brands} onChange={setBrand} label="Company" />
-        </Attribute>
-        <Attribute>
-          <Dropdown options={options} onChange={setColor} label="Color" />
-        </Attribute>
-        <Attribute>
-          <Dropdown options={options} onChange={setPrice} label="Price" />
-        </Attribute>
-        <Container>
-          <SortBy options={options} label="Sort By" />
-        </Container>
-      </Wrapper>
-    </>
-  );
-}
 
 const Wrapper = styled.div`
   display: flex;
@@ -108,4 +59,4 @@ const Container = styled.div`
   }
 `;
 
-export default ProductDetails;
+export {Wrapper,Image,Attribute,Container};
