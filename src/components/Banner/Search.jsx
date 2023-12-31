@@ -1,17 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-
-function SearchComponent(props) {
-  return (
-    <SearchWrapper>
-      <SearchIcon
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/35d1a11c68fd862bcfb5478784180d55ca9fda861af0f20129c18e7a9af30b2c?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        loading="lazy"
-      />
-      <SearchText placeholder="Search Product" />
-    </SearchWrapper>
-  );
-}
 
 const SearchWrapper = styled.div`
   border-radius: 48px;
@@ -56,4 +43,4 @@ const SearchText = styled.input`
   }
 `;
 
-export default SearchComponent;
+export  {SearchText,SearchIcon,SearchWrapper};

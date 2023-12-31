@@ -15,13 +15,15 @@ import {
 
 import StyledComponent from "../../components/Banner/Head";
 import DiscountBanner from "../../components/Banner/Banner";
-import SearchComponent from "../../components/Banner/Search";
+import {SearchText,SearchIcon,SearchWrapper} from "../../components/Banner/Search";
 import ProductItem from "../../components/ProductCard/Card";
 
 const Home = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [keyword,setKeyword] = useState("");
+  const [searchKey,setSearchKey] = useState("");
 
   const options = ["Option 1", "Option 2", "Option 3"];
   const colors = ["Blue", "Black", "White"];
@@ -104,11 +106,42 @@ const Home = () => {
   }, [brand, color]);
 
   useEffect(() => {}, [brand, color, price]);
+
+  
+  useEffect(()=>{
+    const searchProducts = async (searchKey) => {
+      try {
+        const { data } = await axios.get(`/api/v1/product/search/${searchKey}`);
+        setProducts(data?.products);
+        console.log(data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if(searchKey) searchProducts(searchKey);
+  },[searchKey]);
+  
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      console.log('Enter key pressed. Performing function...');
+      setSearchKey(keyword);
+    }
+  };
+  
   return (
     <>
       <StyledComponent />
       <DiscountBanner />
-      <SearchComponent />
+
+      
+    <SearchWrapper>
+      <SearchIcon
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/35d1a11c68fd862bcfb5478784180d55ca9fda861af0f20129c18e7a9af30b2c?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
+        loading="lazy"
+      />
+      <SearchText placeholder="Search Product" value={keyword} onChange={(e) => setKeyword(e.target.value)} 
+        onKeyDown={handleEnter}/>
+    </SearchWrapper>
 
       <Wrapper>
         <Image
@@ -161,7 +194,7 @@ const Home = () => {
         ))}
       </GridContainer>
       <div>
-      {products && (!brand && !color) && products.length < total && (
+      {products && (!brand && !color && !price) && (!searchKey) && products.length < total && (
               <button
                 id="loadMore"
                 onClick={(e) => {
