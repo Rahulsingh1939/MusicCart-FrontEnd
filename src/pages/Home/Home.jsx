@@ -15,15 +15,19 @@ import {
 
 import StyledComponent from "../../components/Banner/Head";
 import DiscountBanner from "../../components/Banner/Banner";
-import {SearchText,SearchIcon,SearchWrapper} from "../../components/Banner/Search";
+import {
+  SearchText,
+  SearchIcon,
+  SearchWrapper,
+} from "../../components/Banner/Search";
 import ProductItem from "../../components/ProductCard/Card";
 
 const Home = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [keyword,setKeyword] = useState("");
-  const [searchKey,setSearchKey] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [searchKey, setSearchKey] = useState("");
 
   const options = ["Option 1", "Option 2", "Option 3"];
   const colors = ["Blue", "Black", "White"];
@@ -63,20 +67,22 @@ const Home = () => {
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const { data } = await axios.get(`/api/v1/product/product-list/:${page}`);
+        const { data } = await axios.get(
+          `/api/v1/product/product-list/:${page}`
+        );
         setProducts(data.products);
       } catch (error) {
         console.log(error);
       }
     };
-     getAllProducts();
+    getAllProducts();
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (page === 1) return;
-    if (!brand && !color) loadMore() ;
-  }, [brand,color,page]);
+    if (!brand && !color) loadMore();
+  }, [brand, color, page]);
   //load more
   const loadMore = async () => {
     try {
@@ -107,8 +113,7 @@ const Home = () => {
 
   useEffect(() => {}, [brand, color, price]);
 
-  
-  useEffect(()=>{
+  useEffect(() => {
     const searchProducts = async (searchKey) => {
       try {
         const { data } = await axios.get(`/api/v1/product/search/${searchKey}`);
@@ -118,30 +123,33 @@ const Home = () => {
         console.log(error);
       }
     };
-    if(searchKey) searchProducts(searchKey);
-  },[searchKey]);
-  
+    if (searchKey) searchProducts(searchKey);
+  }, [searchKey]);
+
   const handleEnter = (event) => {
-    if (event.key === 'Enter') {
-      console.log('Enter key pressed. Performing function...');
+    if (event.key === "Enter") {
+      console.log("Enter key pressed. Performing function...");
       setSearchKey(keyword);
     }
   };
-  
+
   return (
     <>
       <StyledComponent />
       <DiscountBanner />
 
-      
-    <SearchWrapper>
-      <SearchIcon
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/35d1a11c68fd862bcfb5478784180d55ca9fda861af0f20129c18e7a9af30b2c?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        loading="lazy"
-      />
-      <SearchText placeholder="Search Product" value={keyword} onChange={(e) => setKeyword(e.target.value)} 
-        onKeyDown={handleEnter}/>
-    </SearchWrapper>
+      <SearchWrapper>
+        <SearchIcon
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/35d1a11c68fd862bcfb5478784180d55ca9fda861af0f20129c18e7a9af30b2c?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
+          loading="lazy"
+        />
+        <SearchText
+          placeholder="Search Product"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={handleEnter}
+        />
+      </SearchWrapper>
 
       <Wrapper>
         <Image
@@ -194,16 +202,22 @@ const Home = () => {
         ))}
       </GridContainer>
       <div>
-      {products && (!brand && !color && !price) && (!searchKey) && products.length < total && (
-              <button
-                id="loadMore"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPage(page + 1);
-                }}
-              >Load More...
-                </button>
-            )}
+        {products &&
+          !brand &&
+          !color &&
+          !price &&
+          !searchKey &&
+          products.length < total && (
+            <button
+              id="loadMore"
+              onClick={(e) => {
+                e.preventDefault();
+                setPage(page + 1);
+              }}
+            >
+              Load More...
+            </button>
+          )}
       </div>
     </>
   );
