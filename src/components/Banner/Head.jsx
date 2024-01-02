@@ -5,7 +5,7 @@ import { useAuth } from "../../context/api";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 
-const StyledComponent = (props) => {
+const StyledComponent = ({ location }) => {
   const [auth, setAuth] = useAuth();
   const [cart] = useCart();
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ const StyledComponent = (props) => {
           srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/15468f3ce0b845613e53039ae081050a0e7a68044011081ed998281f490a7ef6?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
         />
         <Title>MusiCart</Title>
-        <Subtitle>Home</Subtitle>
+        <Subtitle>
+          <span onClick={() => navigate("/")}>Home</span> &nbsp; / &nbsp; {location}{" "}
+        </Subtitle>
       </Header>
       {auth.user && (
         <Cart type="button" onClick={() => navigate("/cart")}>

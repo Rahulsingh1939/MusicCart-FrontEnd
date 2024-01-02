@@ -28,7 +28,7 @@ const ProductPage = () => {
   return (
     <>
       <Layout>
-        <StyledComponent />
+        <StyledComponent location={product.name}/>
         <Container
           onClick={() => {
             navigate("/");
