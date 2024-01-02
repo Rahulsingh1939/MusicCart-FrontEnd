@@ -25,7 +25,7 @@ import ProductItem from "../../components/ProductCard/Card";
 
 const Home = () => {
   const [auth, setAuth] = useAuth();
-  const [cart,setCart] = useCart();
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [searchKey, setSearchKey] = useState("");
@@ -33,10 +33,19 @@ const Home = () => {
   const options = ["Neckbands", "Speakers", "Headphones"];
   const colors = ["Blue", "Black", "White"];
   const brands = ["Boat", "JBL", "Sony"];
+  const priceRange = ["0 - 100", "100-200", ">200"];
+  const [sortKey, setsortKey] = useState("");
+  const sortBy = [
+    "Price : Lowest",
+    "Price : Highest",
+    "Name : (A-Z)",
+    "Name : (Z-A)",
+  ];
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
+  const [sort, setSort] = useState("");
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   useEffect(() => {
@@ -69,7 +78,7 @@ const Home = () => {
     const getAllProducts = async () => {
       try {
         const { data } = await axios.get(
-          `/api/v1/product/product-list/:${page}`
+          `/api/v1/product/product-list/${page}${sortKey&&`?sort=${sortKey}`}`
         );
         setProducts(data.products);
       } catch (error) {
@@ -81,13 +90,36 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    const getProductSorted = async () => {
+    let sortKey="";
+    if (sort) {
+      if (sort == sortBy[0]) sortKey="price";
+      else if (sort == sortBy[1]) sortKey="-price";
+      else if (sort == sortBy[2]) sortKey="name";
+      else if (sort == sortBy[3]) sortKey="-name";
+    }
+      try {
+        const { data } = await axios.get(
+          `/api/v1/product/product-list/${page}?sort=${sortKey}`
+        );
+        setProducts(data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (sort) getProductSorted();
+  }, [sort]);
+
+  useEffect(() => {
     if (page === 1) return;
-    if (!brand && !color && !category) loadMore();
-  }, [brand, color,category, page]);
+    if (!brand && !color && !category && !price) loadMore();
+  }, [brand, color, category, page]);
   //load more
   const loadMore = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(
+        `/api/v1/product/product-list/${page}${sortKey&&`?sort=${sortKey}`}`
+      );
       setProducts([...products, ...data?.products]);
     } catch (error) {
       console.log(error);
@@ -101,6 +133,11 @@ const Home = () => {
         if (category) args.category = category;
         if (brand) args.brand = brand;
         if (color) args.color = color;
+        if (price) {
+          if (price == "0 - 100") args.price = [0, 100];
+          else if (price == "100-200") args.price = [100, 200];
+          else if (price == ">200") args.price = [200];
+        }
         const { data } = await axios.post(
           `/api/v1/product/filtered-products`,
           args
@@ -110,8 +147,8 @@ const Home = () => {
         console.log(error);
       }
     };
-    if (brand || color || category) getFiltered();
-  }, [brand, color,category]);
+    if (brand || color || category || price) getFiltered();
+  }, [brand, color, category, price]);
 
   useEffect(() => {}, [brand, color, price]);
 
@@ -166,7 +203,7 @@ const Home = () => {
           <Dropdown
             options={options}
             onChange={setCategory}
-            label={category ? category:"Headphone Type"}
+            label={category ? category : "Headphone Type"}
           />
         </Attribute>
         <Attribute>
@@ -184,10 +221,18 @@ const Home = () => {
           />
         </Attribute>
         <Attribute>
-          <Dropdown options={options} onChange={setPrice} label="Price" />
+          <Dropdown
+            options={priceRange}
+            onChange={setPrice}
+            label={price ? price : "Price"}
+          />
         </Attribute>
         <Container>
-          <SortBy options={options} label="Sort By" />
+          <SortBy
+            options={sortBy}
+            onChange={setSort}
+            label={sort ? sort : "Sort By"}
+          />
         </Container>
       </Wrapper>
 

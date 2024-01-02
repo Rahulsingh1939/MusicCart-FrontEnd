@@ -49,7 +49,7 @@ const Icon = styled.img`
   margin-top: 8px;
   max-width: 100%;
 `;
-const SortBy = ({ options, label }) => {
+const SortBy = ({ options, label,onChange }) => {
   const [isopen, setIsOpen] = useState(false);
   const [choice, setChoice] = useState("");
 
@@ -58,8 +58,7 @@ const SortBy = ({ options, label }) => {
   };
 
   const handleItemClick = (item) => {
-    setChoice(item);
-    console.log(`Selected: ${item}`);
+    onChange(item);
     setIsOpen(false);
   };
 
