@@ -15,6 +15,7 @@ import { AuthProvider } from "./context/api.jsx";
 
 import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import { CartProvider } from "./context/cart.jsx";
+import CartPage from "./pages/CartPage/CartPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
   },
   {
     path: "/product/:slug",
