@@ -3,6 +3,8 @@ import Layout from "../../components/Layout/Layout";
 import StyledComponent from "../../components/Banner/Head";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import CartDetails from "../../components/CartDetails/CartDetails";
+import BillDetails from "../../components/TotalBill/TotalBillComp";
 
 const CartPage = () => {
     const navigate=useNavigate();
@@ -24,6 +26,10 @@ const CartPage = () => {
           />
           <Title>My Cart</Title>
         </CartLogo>
+        <div style={{display:"flex"}}>
+            <div style={{width:"60%"}}><CartDetails /><CartDetails /></div>
+            <div style={{width:"30%"}}><BillDetails/></div>
+        </div>
         
       </Layout>
     </>
@@ -54,7 +60,6 @@ const CartLogo = styled.div`
   margin: 3%;
 
   gap: 20px;
-  width: 100vw;
   height: 4vh;
 justify-content:center;
 align-items: center;

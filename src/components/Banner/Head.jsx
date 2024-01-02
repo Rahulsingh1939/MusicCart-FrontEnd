@@ -18,10 +18,10 @@ const StyledComponent = ({ location }) => {
         />
         <Title>MusiCart</Title>
         <Subtitle>
-          <span onClick={() => navigate("/")}>Home</span> &nbsp; / &nbsp; {location}{" "}
+          <span onClick={() => navigate("/")}>Home</span>  &nbsp;{location && (`/ ${location}`)}{" "}
         </Subtitle>
       </Header>
-      {auth.user && (
+      {auth.user && !(location=="Cart") && (
         <Cart type="button" onClick={() => navigate("/cart")}>
           <CartImage
             loading="lazy"

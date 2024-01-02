@@ -27,13 +27,12 @@ const Home = () => {
   const [auth, setAuth] = useAuth();
   const [cart,setCart] = useCart();
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [searchKey, setSearchKey] = useState("");
 
-  const options = ["Option 1", "Option 2", "Option 3"];
+  const options = ["Neckbands", "Speakers", "Headphones"];
   const colors = ["Blue", "Black", "White"];
-  const brands = ["BOAT", "JBL", "NOISE"];
+  const brands = ["Boat", "JBL", "Sony"];
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
@@ -42,16 +41,16 @@ const Home = () => {
   const [page, setPage] = useState(1);
   useEffect(() => {
     //get all cat
-    const getAllCategory = async () => {
-      try {
-        const { data } = await axios.get("/api/v1/category/get-category");
-        if (data?.success) {
-          setCategories(data?.category);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const getAllCategory = async () => {
+    //   try {
+    //     const { data } = await axios.get("/api/v1/category/get-category");
+    //     if (data?.success) {
+    //       setCategories(data?.category);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
     //getTOtal COunt
     const getTotal = async () => {
       try {
@@ -62,7 +61,7 @@ const Home = () => {
       }
     };
     getTotal();
-    getAllCategory();
+    // getAllCategory();
     //eslint-disable-next-line
   }, []);
 
@@ -83,8 +82,8 @@ const Home = () => {
 
   useEffect(() => {
     if (page === 1) return;
-    if (!brand && !color) loadMore();
-  }, [brand, color, page]);
+    if (!brand && !color && !category) loadMore();
+  }, [brand, color,category, page]);
   //load more
   const loadMore = async () => {
     try {
@@ -99,6 +98,7 @@ const Home = () => {
     const getFiltered = async () => {
       try {
         let args = {};
+        if (category) args.category = category;
         if (brand) args.brand = brand;
         if (color) args.color = color;
         const { data } = await axios.post(
@@ -110,8 +110,8 @@ const Home = () => {
         console.log(error);
       }
     };
-    if (brand || color) getFiltered();
-  }, [brand, color]);
+    if (brand || color || category) getFiltered();
+  }, [brand, color,category]);
 
   useEffect(() => {}, [brand, color, price]);
 
@@ -166,7 +166,7 @@ const Home = () => {
           <Dropdown
             options={options}
             onChange={setCategory}
-            label="Headphone Type"
+            label={category ? category:"Headphone Type"}
           />
         </Attribute>
         <Attribute>
@@ -211,6 +211,7 @@ const Home = () => {
           !brand &&
           !color &&
           !price &&
+          !category &&
           !searchKey &&
           products.length < total && (
             <button
