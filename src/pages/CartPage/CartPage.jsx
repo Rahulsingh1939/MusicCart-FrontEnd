@@ -1,10 +1,14 @@
 import React from 'react'
+import Layout from '../../components/Layout/Layout'
+import StyledComponent from '../../components/Banner/Head'
 
 const CartPage = () => {
   return (
-    <div>
-      This is Cart Page
-    </div>
+    <>
+    <Layout>
+        <StyledComponent />
+    </Layout>
+    </>
   )
 }
 

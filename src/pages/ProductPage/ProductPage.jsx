@@ -4,10 +4,9 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/Layout/Header";
 import StyledComponent from "../../components/Banner/Head";
-import Footer from "../../components/Layout/Footer";
 import ProDetails from "./ProD";
+import Layout from "../../components/Layout/Layout";
 
 const ProductPage = () => {
   const [product, setProduct] = useState("");
@@ -28,22 +27,23 @@ const ProductPage = () => {
   };
   return (
     <>
-      <Header />
-      <StyledComponent />
-      <Container
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        <span>Back to products</span>
-      </Container>
-      <Wrapper>
-        <Content>{product.description}</Content>
-      </Wrapper>
-      <div style={containerStyle}>
-      <ImageElement loading="lazy" srcSet={product.photoUrl} />
-      <ProDetails product={product}/></div>
-      <Footer />
+      <Layout>
+        <StyledComponent />
+        <Container
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <span>Back to products</span>
+        </Container>
+        <Wrapper>
+          <Content>{product.description}</Content>
+        </Wrapper>
+        <div style={containerStyle}>
+          <ImageElement loading="lazy" srcSet={product.photoUrl} />
+          <ProDetails product={product} />
+        </div>
+      </Layout>
     </>
   );
 };
@@ -119,6 +119,6 @@ const StyledImag = styled.img`
   }
 `;
 const containerStyle = {
-    display: 'flex',
-  };
+  display: "flex",
+};
 export default ProductPage;
