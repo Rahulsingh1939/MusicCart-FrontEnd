@@ -1,25 +1,41 @@
 import React from "react";
 import styled from "styled-components";
 import { useAuth } from "../../context/api";
+import { useCart } from "../../context/cart";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-function ProductItem({ name, price, description, photoUrl }) {
+function ProductItem({ name, price, description, photoUrl,id,slug,p }) {
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
   const [isCartVisible, setIsCartVisible] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     setIsCartVisible(true);
   };
-
+  const handleImgClick = () => {
+    navigate(`product/${slug}`)
+  }
   return (
-    <Wrapper>
+    <Wrapper >
       <ImageWrapper>
         <LazyImage
           loading="lazy"
           srcSet={photoUrl}
+          onClick={handleImgClick}
         />
         {auth.user && (
           <StyledImg
             loading="lazy"
+            onClick={()=>{
+              setCart([...cart, p]);
+              localStorage.setItem(
+                "cart",
+                JSON.stringify([...cart, p])
+              );
+              toast.success("Item Added to cart");
+            }}
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d499dad26aa42de99e77541483faeedbbdc31358dd7032bacf84aba3b52e6a97?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
           />
         )}

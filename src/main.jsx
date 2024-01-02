@@ -1,20 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
 
-import App from './App.jsx'
-import Signin from './pages/Signin/Signin.jsx';
-import Register from './pages/Register/Register.jsx';
-import Home from './pages/Home/Home.jsx';
-import PageNotFound from './pages/PageNotFound/PageNotFound.jsx';
+import App from "./App.jsx";
+import Signin from "./pages/Signin/Signin.jsx";
+import Register from "./pages/Register/Register.jsx";
+import Home from "./pages/Home/Home.jsx";
+import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
-import './index.css'
-import { AuthProvider } from './context/api.jsx';
+import "./index.css";
+import { AuthProvider } from "./context/api.jsx";
+
+import ProductPage from "./pages/ProductPage/ProductPage.jsx";
+import { CartProvider } from "./context/cart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,17 +34,23 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
+    path: "/product/:slug",
+    element: <ProductPage />,
+  },
+  {
     path: "/*",
-    element: <PageNotFound />
-  }
+    element: <PageNotFound />,
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     {/* <App /> */}
-    <AuthProvider >
-    <RouterProvider router={router} />
-    <Toaster />
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+      <Toaster />
     </AuthProvider>
-  </>,
-)
+  </>
+);

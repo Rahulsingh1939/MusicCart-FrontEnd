@@ -5,6 +5,7 @@ import SortBy from "../../components/Banner/SortBy";
 import Dropdown from "../../components/Banner/Dropdown";
 
 import { useAuth } from "../../context/api";
+import { useCart } from "../../context/cart";
 
 import {
   Wrapper,
@@ -24,6 +25,7 @@ import ProductItem from "../../components/ProductCard/Card";
 
 const Home = () => {
   const [auth, setAuth] = useAuth();
+  const [cart,setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -197,6 +199,9 @@ const Home = () => {
               price={p.price}
               description={p.description.substring(0, 30)}
               photoUrl={p.photoUrl}
+              id={p._id}
+              slug={p.slug}
+              p={p}
             />
           </GridItem>
         ))}
