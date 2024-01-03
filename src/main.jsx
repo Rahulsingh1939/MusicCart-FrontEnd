@@ -17,6 +17,8 @@ import { AuthProvider } from "./context/api.jsx";
 import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import { CartProvider } from "./context/cart.jsx";
 import CartPage from "./pages/CartPage/CartPage.jsx";
+import { TotalProvider } from "./context/total.jsx";
+import Checkout from "./pages/Checkout/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,11 +43,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/order-success",
-    element: <OrderSuccess/>,
+    element: <OrderSuccess />,
   },
   {
     path: "/product/:slug",
     element: <ProductPage />,
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />,
+  },
+  {
+    path: "/checkout-direct/:slug",
+    element: <Checkout />,
   },
   {
     path: "/*",
@@ -58,7 +68,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <App /> */}
     <AuthProvider>
       <CartProvider>
-        <RouterProvider router={router} />
+        <TotalProvider>
+          <RouterProvider router={router} />
+        </TotalProvider>
       </CartProvider>
       <Toaster />
     </AuthProvider>

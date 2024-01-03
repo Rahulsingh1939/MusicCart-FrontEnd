@@ -22,10 +22,12 @@ import {
   SearchWrapper,
 } from "../../components/Banner/Search";
 import ProductItem from "../../components/ProductCard/Card";
+import VerticalCard from "../../components/ProductCard/VerticalCard";
 
 const Home = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
+  const [view,setView]=useState(true);
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [searchKey, setSearchKey] = useState("");
@@ -191,14 +193,20 @@ const Home = () => {
       </SearchWrapper>
 
       <Wrapper>
-        <Image
+        {!view ? (<Image
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/04c7ce2067c365edeb77e66c5ad5e80eb421186d9df2ef44f46466e88c67f18e?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
-        <Image
+          onClick={()=>{
+            setView(true);
+          }}
+        />):
+        (<Image
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/8cb255ad535b0e12aee5b0b0e9d9695f7b4d506d595e9884fbb5abb4faf6e78b?apiKey=c41df0b048fb4bad873f2d9b07bfce38&"
-        />
+          onClick={()=>{
+            setView(false);
+          }}
+        />)}
         <Attribute>
           <Dropdown
             options={options}
@@ -236,7 +244,7 @@ const Home = () => {
         </Container>
       </Wrapper>
 
-      <GridContainer>
+      {view ? (<GridContainer>
         {products?.map((p) => (
           <GridItem key={p._id}>
             <ProductItem
@@ -249,8 +257,12 @@ const Home = () => {
               p={p}
             />
           </GridItem>
+          
         ))}
-      </GridContainer>
+      </GridContainer>):(
+        products?.map((p) => (
+      <VerticalCard key={p._id} p={p}/>))
+      )}
       <div>
         {products &&
           !brand &&

@@ -20,6 +20,10 @@ function ProDetails({ product }) {
     }
   }
   const { About } = product;
+
+  const handleDirect= ()=>{
+    navigate(`/checkout-direct/${product.slug}`)
+  }
   return (
     <Container>
       <ProductName>{product.name}</ProductName>
@@ -72,7 +76,7 @@ function ProDetails({ product }) {
       >
         Add to cart
       </AddToCart>
-      <BuyNow>Buy Now</BuyNow>
+      <BuyNow onClick={handleDirect}>Buy Now</BuyNow>
     </Container>
   );
 }
@@ -201,6 +205,7 @@ const BuyNow = styled.button`
   margin-top: 20px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   padding: 17px 60px;
   font: 400 33px Roboto, sans-serif;
 

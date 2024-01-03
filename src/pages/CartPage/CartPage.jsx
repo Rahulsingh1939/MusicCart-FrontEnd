@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import StyledComponent from "../../components/Banner/Head";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import CartDetails from "../../components/CartDetails/CartDetails";
 import BillDetails from "../../components/TotalBill/TotalBillComp";
+import { useCart } from "../../context/cart";
+import { useAuth } from "../../context/api";
+// import { useTotal } from "../../context/total";
+
 
 const CartPage = () => {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
+  const [auth] = useAuth();
+  const [cart, setCart] = useCart();
   return (
     <>
       <Layout>
-        <StyledComponent location="Cart"/>
+        <StyledComponent location="Cart" />
         <Container
           onClick={() => {
             navigate("/");
@@ -26,11 +32,16 @@ const CartPage = () => {
           />
           <Title>My Cart</Title>
         </CartLogo>
-        <div style={{display:"flex"}}>
-            <div style={{width:"60%"}}><CartDetails /><CartDetails /></div>
-            <div style={{width:"30%"}}><BillDetails/></div>
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "60%" }}>
+            {cart?.map((p) => {
+              return <CartDetails key={p._id} p={p} />;
+            })}
+          </div>
+          <div style={{ width: "30%" }}>
+            {cart.length ? <BillDetails />:"Cart is"}
+          </div>
         </div>
-        
       </Layout>
     </>
   );
@@ -61,8 +72,8 @@ const CartLogo = styled.div`
 
   gap: 20px;
   height: 4vh;
-justify-content:center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 991px) {
     margin-top: 40px;
@@ -75,7 +86,7 @@ const Image = styled.img`
   object-position: center;
   width: 3vw;
   fill: #000;
-  margin-left:42vw;
+  margin-left: 42vw;
   overflow: hidden;
   max-width: 100%;
 `;

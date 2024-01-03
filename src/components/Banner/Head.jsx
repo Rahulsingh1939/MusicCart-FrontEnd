@@ -21,7 +21,7 @@ const StyledComponent = ({ location }) => {
           <span onClick={() => navigate("/")}>Home</span>  &nbsp;{location && (`/ ${location}`)}{" "}
         </Subtitle>
       </Header>
-      {auth.user && !(location=="Cart") && (
+      {auth.user && !(location=="Cart" || location=="Checkout") && (
         <Cart type="button" onClick={() => navigate("/cart")}>
           <CartImage
             loading="lazy"
